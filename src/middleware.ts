@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-export {default} from "next-auth/middleware" 
+// export {default} from "next-auth/middleware" 
 import { getToken } from "next-auth/jwt"
 
 
@@ -24,7 +24,7 @@ export async function  middleware(request: NextRequest) {
   return NextResponse.redirect(new URL('/home', request.url))
 }
  
-// See "Matching Paths" below to learn more
+
 export const config = {
   matcher: [
     '/sign-in',
@@ -32,7 +32,6 @@ export const config = {
     '/',
     '/dashboard/:path*',
     '/verify/:path*'
-
   ]
 }
 
