@@ -1,3 +1,7 @@
+"use client"
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import { useToast } from '@/hooks/use-toast'
 import { verifySchema } from '@/schemas/verifySchema'
 import { ApiResponse } from '@/types/ApiResponse'
@@ -45,7 +49,39 @@ function VerifyAccount() {
   }
     
   return (
-    <div>VerifyAccount</div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className="text-center">
+             <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+                 Verify Your Account
+             </h1>
+             <p className="mb-4">Enter Verification Code Sent To Your Email</p>
+        </div>
+          
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+           <FormField
+            name="code"
+            control={form.control}
+            render={({ field }) => (
+            <FormItem>
+              <FormLabel>Verification Code</FormLabel>
+              <FormControl>
+                <Input placeholder="code" {...field} />
+              </FormControl>
+              <FormDescription>
+                Type In Your Code
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+          />
+          <Button type="submit">Submit</Button>
+         </form>
+        </Form>
+
+       </div>
+    </div>
   )
 }
 
