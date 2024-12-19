@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { useDebounceValue , useDebounceCallback} from 'usehooks-ts'
+import {useDebounceCallback} from 'usehooks-ts'
 import { useToast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
 import { signUpSchema } from "@/schemas/signUpSchema"
@@ -19,7 +19,7 @@ import { Loader2 } from "lucide-react"
 
 
 
-function Page() {
+function SignUp() {
   const [username , setUsername] = useState("")
   const [usernameMessage , setUsernameMessage] = useState("")
   const [isCheckingUsername , setIsCheckingUserName] = useState(false)
@@ -181,4 +181,4 @@ function Page() {
   )
 }
 
-export default Page
+export default SignUp
