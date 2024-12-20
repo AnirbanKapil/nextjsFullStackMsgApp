@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
 
-
-import NavBar from "@/components/NavBar";
+import AuthProvider from "@/context/AuthProvider";
+import { Toaster } from "@/components/ui/toaster"
+import NavBar from "@/components/Navbar";
+import "./globals.css"
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -27,15 +29,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      
+      <AuthProvider>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NavBar />
         {children}
-       
+        <Toaster />
       </body>
-      
+      </AuthProvider>
     </html>
   );
 }
