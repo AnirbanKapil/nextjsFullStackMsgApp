@@ -8,21 +8,54 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Terminal } from "lucide-react"  
+  import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "@/components/ui/alert-dialog"
+import { Button } from "./ui/button"
+import { X } from "lucide-react"
+import { Message } from "@/model/User"
+import { useToast } from "@/hooks/use-toast"
 
-function MessageCard() {
+type MessageCardProps = {
+  message : Message,
+  onMessageDelete : (messageId : string) => void
+}
+  
+
+function MessageCard({message , onMessageDelete} : MessageCardProps) {
+  const toast = useToast()
   return (
     <Card>
     <CardHeader>
       <CardTitle>Card Title</CardTitle>
-      <Alert>
-      <Terminal className="h-4 w-4" />
-      <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>
-        You can add components to your app using the cli.
-      </AlertDescription>
-    </Alert>
+      <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive"><X className="w-5 h-5"/></Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={handleDeleteConfirm}>
+             Continue
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
       <CardDescription>Card Description</CardDescription>
     </CardHeader>
     <CardContent>
