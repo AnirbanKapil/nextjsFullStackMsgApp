@@ -11,6 +11,7 @@ import { ApiResponse } from "@/types/ApiResponse"
 import { zodResolver } from "@hookform/resolvers/zod"
 import axios, { AxiosError } from "axios"
 import { Loader2, RefreshCcw } from "lucide-react"
+import { User } from "next-auth"
 import { useSession } from "next-auth/react"
 import { useCallback, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -106,6 +107,19 @@ function DashBoard() {
         variant : "destructive"
     })
   }
+}
+
+const {username} = session?.user as User
+
+const baseUrl = `${window.location.protocol}//${window.location.host}`
+const profileUrl = `${baseUrl}/u/${username}`
+
+const copyToClipboard = () => {
+  navigator.clipboard.writeText(profileUrl)
+  toast({
+    title : "URL copied",
+    description : "Profile URL has been copied to clipboard"
+  })
 }
 
 if(!session || !session.user){
